@@ -4,10 +4,9 @@
   "description": "Portfolio of Chaitanya Pratap Narayan - Python Full Stack & Frontend Developer",
   "type": "module",
   "scripts": {
-    "build": "node scripts/sync.js",
-    "dev": "node server.js",
-    "start": "node server.js",
-    "sync": "node scripts/sync.js"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "keywords": [
     "portfolio",
@@ -19,5 +18,8 @@
     "fullstack"
   ],
   "author": "Chaitanya Pratap Narayan",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^8.3.5"
+  }
 }

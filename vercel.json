@@ -1,5 +1,4 @@
 {
   "cleanUrls": true,
-  "buildCommand": "node scripts/sync.js",
-  "outputDirectory": "."
+  "framework": "vite"
 }
