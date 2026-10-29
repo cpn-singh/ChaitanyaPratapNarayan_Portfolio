@@ -29,6 +29,8 @@ function staticAssetsPlugin() {
       copyDir(resolve(__dirname, 'assets'), resolve(__dirname, 'dist/assets'));
       // 2. Copy KTX2 Basis transcoder to dist/libs
       copyDir(resolve(__dirname, 'libs'), resolve(__dirname, 'dist/libs'));
+      // 3. Copy entire _astro directory so all dynamic script imports resolve
+      copyDir(resolve(__dirname, '_astro'), resolve(__dirname, 'dist/_astro'));
       // 3. Copy sitemap if exists
       const sitemap = resolve(__dirname, 'sitemap-index.xml');
       if (fs.existsSync(sitemap)) {
