@@ -216,6 +216,78 @@ and production web platforms.</p> </div> <div class="bottom" data-astro-cid-spfo
  <script type="module" src="/_astro/Layout.astro_astro_type_script_index_0_lang.RJ8D73Hs.js"></script>
 
 
+<script id="portfolio-infallible-menu">
+(function() {
+  function setupMenuToggle() {
+    document.addEventListener('click', function(e) {
+      const menuBtn = e.target.closest && e.target.closest('.menu-cta');
+      const isOverlay = e.target.classList && e.target.classList.contains('overlay');
+      
+      if (!menuBtn && !isOverlay) return;
+      
+      const menu = document.querySelector('[data-component="Menu"], .portfolio-menu');
+      const header = document.querySelector('#header');
+      const actualBtn = menuBtn || document.querySelector('.menu-cta');
+      if (!menu) return;
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      const willOpen = isOverlay ? false : !menu.classList.contains('active');
+
+      if (willOpen) {
+        menu.classList.add('active');
+        if (header) header.classList.add('menu-open');
+        if (actualBtn) actualBtn.classList.add('close');
+        menu.style.display = 'block';
+        menu.style.visibility = 'visible';
+        menu.style.opacity = '1';
+        menu.style.pointerEvents = 'all';
+      } else {
+        menu.classList.remove('active');
+        if (header) header.classList.remove('menu-open');
+        if (actualBtn) actualBtn.classList.remove('close');
+        menu.style.display = 'none';
+        menu.style.visibility = 'hidden';
+        menu.style.opacity = '0';
+        menu.style.pointerEvents = 'none';
+      }
+
+      if (actualBtn) {
+        const label = willOpen ? 'Close' : 'Menu';
+        const spans = actualBtn.querySelectorAll('span');
+        spans.forEach(function(s) { s.textContent = label; });
+      }
+    }, true);
+
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest && e.target.closest('.portfolio-menu .nav-link, .portfolio-menu .terms-link a');
+      if (!link) return;
+      const menu = document.querySelector('[data-component="Menu"], .portfolio-menu');
+      const header = document.querySelector('#header');
+      const btn = document.querySelector('.menu-cta');
+      if (menu) {
+        menu.classList.remove('active');
+        menu.style.display = 'none';
+        menu.style.visibility = 'hidden';
+        menu.style.opacity = '0';
+        menu.style.pointerEvents = 'none';
+      }
+      if (header) header.classList.remove('menu-open');
+      if (btn) {
+        btn.classList.remove('close');
+        btn.querySelectorAll('span').forEach(function(s) { s.textContent = 'Menu'; });
+      }
+    }, false);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupMenuToggle);
+  } else {
+    setupMenuToggle();
+  }
+})();
+</script>
 </body>
 
 </body></html> 

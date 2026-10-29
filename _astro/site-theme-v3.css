@@ -242,7 +242,7 @@ h1, h2, h3, h4, h5,
   }
 }
 
-/* --- Mobile Touch & Menu Toggle Enhancements --- */
+/* --- Mobile Touch & Infallible Menu Toggle Enhancements --- */
 .menu-cta,
 .menu-cta *,
 .dots-w,
@@ -263,11 +263,18 @@ h1, h2, h3, h4, h5,
 #header .menu-cta {
   position: relative !important;
   z-index: 10001 !important;
+  pointer-events: auto !important;
 }
 
 :is(.portfolio-menu, .montfort-menu).active,
 [data-component="Menu"].active {
   display: block !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  height: 100dvh !important;
   visibility: visible !important;
   opacity: 1 !important;
   pointer-events: all !important;
@@ -275,7 +282,33 @@ h1, h2, h3, h4, h5,
 }
 
 :is(.portfolio-menu, .montfort-menu).active .overlay {
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: #051723fa !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
   pointer-events: all !important;
+  opacity: 1 !important;
+}
+
+:is(.portfolio-menu, .montfort-menu).active .grid-nav,
+:is(.portfolio-menu, .montfort-menu).active nav,
+:is(.portfolio-menu, .montfort-menu).active ul,
+:is(.portfolio-menu, .montfort-menu).active li,
+:is(.portfolio-menu, .montfort-menu).active .nav-link,
+:is(.portfolio-menu, .montfort-menu).active .grid-terms,
+:is(.portfolio-menu, .montfort-menu).active .terms-w {
+  visibility: visible !important;
+  pointer-events: all !important;
+}
+
+:is(.portfolio-menu, .montfort-menu).active li {
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 :is(.portfolio-menu, .montfort-menu).active .nav-link {
@@ -283,4 +316,13 @@ h1, h2, h3, h4, h5,
   cursor: pointer !important;
   touch-action: manipulation !important;
   -webkit-tap-highlight-color: transparent !important;
+}
+
+:is(.portfolio-menu, .montfort-menu).active .nav-link .text-content span {
+  color: #FFFFFF !important;
+}
+
+:is(.portfolio-menu, .montfort-menu).active .nav-link:hover .text-content span,
+:is(.portfolio-menu, .montfort-menu).active .nav-link.active .text-content span {
+  color: #8ADEE5 !important;
 }
