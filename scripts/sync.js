@@ -11,7 +11,7 @@ const p = portfolioData.personal;
 const c = portfolioData.contact;
 const s = portfolioData.socials;
 
-console.log(`[SYNC] Propagating portfolio data for ${p.fullName} across codebase...`);
+console.log(`[SYNC] Synchronizing portfolio for ${p.fullName} across all pages...`);
 
 const htmlFiles = [
   'index.html',
@@ -30,23 +30,29 @@ for (const rel of htmlFiles) {
 
   let content = fs.readFileSync(filePath, 'utf-8');
 
-  // Contact info
-  content = content.replace(/mailto:[^"']+/g, `mailto:${c.email}`);
-  content = content.replace(/tel:[^"']+/g, `tel:${c.phone}`);
-  content = content.replace(/P\s*:\s*\+91[0-9\s]+/g, c.displayPhone);
+  // Contact info & Socials
+  content = content.replace(/mailto:[^"'<>]+/g, `mailto:${c.email}`);
   content = content.replace(/[a-zA-Z0-9._%+-]+@gmail\.com/g, c.email);
-
-  // Social URLs
+  content = content.replace(/tel:\+?[0-9]+/g, `tel:${c.phone}`);
+  content = content.replace(/\+91\s*[0-9\s]{10,12}/g, c.displayPhone);
   content = content.replace(/https:\/\/github\.com\/[a-zA-Z0-9_-]+/g, s.github);
+  content = content.replace(/github\.com\/[a-zA-Z0-9_-]+/g, s.githubDisplay);
   content = content.replace(/https:\/\/www\.linkedin\.com\/in\/[a-zA-Z0-9_-]+\/?/g, s.linkedin);
+  content = content.replace(/linkedin\.com\/in\/[a-zA-Z0-9_-]+/g, s.linkedinDisplay);
   content = content.replace(/https:\/\/cpn-resume\.vercel\.app\/?/g, s.resumeUrl);
 
-  // Address
-  content = content.replace(/Maujpur,\s*Delhi,\s*India/gi, p.location);
+  // SVG Titles (Homepage & Footers)
+  content = content.replace(/<text x="155\.5" y="88"[^>]*>.*?<\/text>/g, `<text x="155.5" y="88" fill="#FFFFFF" font-family="'Century Gothic', 'Josefin Sans', 'Futura', sans-serif" font-weight="300" font-size="14" letter-spacing="0.22em" text-anchor="middle">${p.brandTitle}</text>`);
+  content = content.replace(/<text x="155\.5" y="108"[^>]*>.*?<\/text>/g, `<text x="155.5" y="108" fill="#8ADEE5" font-family="'Josefin Sans', 'Century Gothic', sans-serif" font-weight="300" font-size="6.5" letter-spacing="0.38em" text-anchor="middle" opacity="0.8">${p.role.toUpperCase()}</text>`);
+  content = content.replace(/<text x="395" y="44"[^>]*>.*?<\/text>/g, `<text x="395" y="44" fill="#FFFFFF" font-family="'Century Gothic', 'Josefin Sans', 'Futura', sans-serif" font-weight="300" font-size="20" letter-spacing="0.30em" text-anchor="middle">${p.brandTitle}</text>`);
+  content = content.replace(/<text x="395" y="62"[^>]*>.*?<\/text>/g, `<text x="395" y="62" fill="#8ADEE5" font-family="'Josefin Sans', 'Century Gothic', sans-serif" font-weight="300" font-size="7.5" letter-spacing="0.45em" text-anchor="middle" opacity="0.8">${p.role.toUpperCase()}</text>`);
 
-  // SVG Titles
-  content = content.replace(/<text x="395" y="44"[^>]*>.*?<\/text>/g, `<text x="395" y="44" fill="#FFFFFF" font-family="'Century Gothic', 'Josefin Sans', 'Futura', sans-serif" font-weight="300" font-size="22" letter-spacing="0.32em" text-anchor="middle">${p.brandTitle}</text>`);
-  content = content.replace(/<text x="395" y="62"[^>]*>.*?<\/text>/g, `<text x="395" y="62" fill="#8ADEE5" font-family="'Josefin Sans', 'Century Gothic', sans-serif" font-weight="300" font-size="8" letter-spacing="0.52em" text-anchor="middle" opacity="0.8">PYTHON FULL STACK &amp; FRONTEND DEVELOPER</text>`);
+  // Subpage SVGs (Mobile & Desktop)
+  content = content.replace(/<text x="142\.5" y="76"[^>]*>.*?<\/text>/g, `<text x="142.5" y="76" fill="#FFFFFF" font-family="'Century Gothic', 'Josefin Sans', 'Futura', sans-serif" font-weight="300" font-size="12" letter-spacing="0.20em" text-anchor="middle">${p.brandTitle}</text>`);
+  content = content.replace(/<text x="142\.5" y="94"[^>]*>.*?<\/text>/g, `<text x="142.5" y="94" fill="#8ADEE5" font-family="'Josefin Sans', 'Century Gothic', sans-serif" font-weight="300" font-size="6" letter-spacing="0.35em" text-anchor="middle" opacity="0.8">${p.role.toUpperCase()}</text>`);
+  content = content.replace(/<text x="460" y="50"[^>]*>.*?<\/text>/g, `<text x="460" y="50" fill="#FFFFFF" font-family="'Century Gothic', 'Josefin Sans', 'Futura', sans-serif" font-weight="300" font-size="20" letter-spacing="0.25em" text-anchor="middle">${p.brandTitle}</text>`);
+  content = content.replace(/<text x="460" y="70"[^>]*>.*?<\/text>/g, `<text x="460" y="70" fill="#8ADEE5" font-family="'Josefin Sans', 'Century Gothic', sans-serif" font-weight="300" font-size="7" letter-spacing="0.45em" text-anchor="middle" opacity="0.8">${p.role.toUpperCase()}</text>`);
+  content = content.replace(/<text x="168" y="25"[^>]*>.*?<\/text>/g, `<text x="168" y="25" fill="#FFFFFF" font-family="'Century Gothic', 'Josefin Sans', 'Futura', sans-serif" font-weight="300" font-size="11" letter-spacing="0.20em" text-anchor="middle">${p.brandTitle}</text>`);
 
   // Copyright
   content = content.replace(/©\s*2026\s*[^|<]+(?:\|[^<]+)?/g, `© 2026 ${p.fullName} | ${p.role} - All rights reserved`);
@@ -55,20 +61,4 @@ for (const rel of htmlFiles) {
   console.log(`[SYNC] Updated ${rel}`);
 }
 
-// Update sitemap-index.xml
-const sitemapPath = path.join(ROOT_DIR, 'sitemap-index.xml');
-if (fs.existsSync(sitemapPath)) {
-  const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://chaitanya-portfolio20.vercel.app/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://chaitanya-portfolio20.vercel.app/development/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://chaitanya-portfolio20.vercel.app/rag/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://chaitanya-portfolio20.vercel.app/agentic-ai/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://chaitanya-portfolio20.vercel.app/data-analysis/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://chaitanya-portfolio20.vercel.app/contact/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-</urlset>`;
-  fs.writeFileSync(sitemapPath, sitemapXml, 'utf-8');
-  console.log('[SYNC] Updated sitemap-index.xml');
-}
-
-console.log('[SYNC] Complete! All code and pages are synchronized with src/data/portfolioData.js.');
+console.log('[SYNC] Successfully completed synchronization.');

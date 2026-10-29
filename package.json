@@ -1,17 +1,22 @@
 {
-  "name": "chaitanya-portfolio",
+  "name": "chaitanya-pratap-narayan-portfolio",
   "version": "1.0.0",
+  "description": "Portfolio of Chaitanya Pratap Narayan - Python Full Stack & Frontend Developer",
   "type": "module",
-  "description": "Portfolio of Chaitanya Pratap Narayan (Python Full Stack & Frontend Developer)",
   "scripts": {
     "sync": "node scripts/sync.js",
-    "predev": "node scripts/sync.js",
-    "prestart": "node scripts/sync.js",
-    "start": "serve . -p 3000",
-    "dev": "serve . -p 3000",
-    "preview": "serve . -p 3000"
+    "start": "node server.js",
+    "dev": "node server.js"
   },
-  "devDependencies": {
-    "serve": "^14.2.4"
-  }
+  "keywords": [
+    "portfolio",
+    "webgl",
+    "threejs",
+    "python",
+    "django",
+    "react",
+    "fullstack"
+  ],
+  "author": "Chaitanya Pratap Narayan",
+  "license": "ISC"
 }
