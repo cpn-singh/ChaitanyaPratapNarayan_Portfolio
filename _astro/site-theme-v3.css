@@ -241,3 +241,46 @@ h1, h2, h3, h4, h5,
     grid-column-end: 13 !important;
   }
 }
+
+/* --- Mobile Touch & Menu Toggle Enhancements --- */
+.menu-cta,
+.menu-cta *,
+.dots-w,
+.dot,
+.menu-w {
+  touch-action: manipulation !important;
+  -webkit-tap-highlight-color: transparent !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+}
+
+#header {
+  z-index: 10000 !important;
+}
+
+#header .menu-cta {
+  position: relative !important;
+  z-index: 10001 !important;
+}
+
+:is(.portfolio-menu, .montfort-menu).active,
+[data-component="Menu"].active {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: all !important;
+  z-index: 9999 !important;
+}
+
+:is(.portfolio-menu, .montfort-menu).active .overlay {
+  pointer-events: all !important;
+}
+
+:is(.portfolio-menu, .montfort-menu).active .nav-link {
+  pointer-events: all !important;
+  cursor: pointer !important;
+  touch-action: manipulation !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
