@@ -49,22 +49,27 @@ function broadcastReload() {
 
 // Watch directory for changes with debounce
 let debounceTimer = null;
-const IGNORED_PATHS = ['.git', 'node_modules', '.idea', '.vscode'];
+const IGNORED_PREFIXES = ['.git', 'node_modules', '.idea', '.vscode', 'dist', 'assets', 'libs', '_astro', 'scratch'];
+const WATCHED_EXTENSIONS = ['.html', '.css'];
 
 try {
   fs.watch(ROOT, { recursive: true }, (eventType, filename) => {
     if (!filename) return;
     const normalized = filename.replace(/\\/g, '/');
-    if (IGNORED_PATHS.some(ignored => normalized.startsWith(ignored))) {
+    if (IGNORED_PREFIXES.some(ignored => normalized.startsWith(ignored) || normalized.includes('/' + ignored + '/'))) {
+      return;
+    }
+    const ext = path.extname(normalized).toLowerCase();
+    if (!WATCHED_EXTENSIONS.includes(ext)) {
       return;
     }
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => {
       console.log(`[LiveReload] Change detected in ${filename}. Reloading browser...`);
       broadcastReload();
-    }, 120);
+    }, 250);
   });
-  console.log('[LiveReload] Active - watching for file changes.');
+  console.log('[LiveReload] Active - watching HTML and CSS changes.');
 } catch (err) {
   console.warn('[LiveReload] Watcher warning:', err.message);
 }
