@@ -4,9 +4,9 @@
   "description": "Portfolio of Chaitanya Pratap Narayan - Python Full Stack & Frontend Developer",
   "type": "module",
   "scripts": {
-    "sync": "node scripts/sync.js",
+    "dev": "node server.js",
     "start": "node server.js",
-    "dev": "node server.js"
+    "sync": "node scripts/sync.js"
   },
   "keywords": [
     "portfolio",
