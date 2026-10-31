@@ -388,3 +388,80 @@ main[data-scene="WhoWeAre"] { background-color: #051723 !important; }
     padding-bottom: 1rem !important;
   }
 }
+
+/* Responsive Fix: Solutions Tabs Height & Overlap Prevention */
+.section-solutions[data-astro-cid-odekpglu] .content-container[data-astro-cid-odekpglu] {
+  position: relative;
+  min-height: 40rem;
+}
+
+.section-solutions[data-astro-cid-odekpglu] .content-container[data-astro-cid-odekpglu] .content-item[data-astro-cid-odekpglu]:not(.active) {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.section-solutions[data-astro-cid-odekpglu] .content-container[data-astro-cid-odekpglu] .content-item[data-astro-cid-odekpglu].active {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  visibility: visible !important;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+
+/* Responsive: Vertical Layout for Experience & Education (replacing horizontal slider on mobile/tablet) */
+@media (max-width: 63.99em) {
+  .section-social[data-astro-cid-232lwzcd] {
+    overflow: visible !important;
+  }
+
+  .images-container[data-astro-cid-232lwzcd] {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    gap: 4rem !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    margin-bottom: 2.5rem !important;
+    overflow: visible !important;
+    scroll-snap-type: none !important;
+  }
+
+  .images-container[data-astro-cid-232lwzcd] .slide[data-astro-cid-232lwzcd] {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex-shrink: 0 !important;
+    cursor: default !important;
+    scroll-snap-align: none !important;
+  }
+
+  .images-container[data-astro-cid-232lwzcd] .slide[data-astro-cid-232lwzcd] .image-container[data-astro-cid-232lwzcd] {
+    width: 100% !important;
+    aspect-ratio: 16 / 10 !important;
+    margin-bottom: 2rem !important;
+    border-radius: 0.75rem !important;
+  }
+
+  .images-container[data-astro-cid-232lwzcd] .slide[data-astro-cid-232lwzcd] .content-mb-wrapper[data-astro-cid-232lwzcd] {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .images-container[data-astro-cid-232lwzcd] .slide[data-astro-cid-232lwzcd] .content-mb-wrapper[data-astro-cid-232lwzcd] .body[data-astro-cid-232lwzcd] {
+    font-size: 1.05rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 2rem !important;
+  }
+
+  .images-container[data-astro-cid-232lwzcd] .slide[data-astro-cid-232lwzcd] .logo-container[data-astro-cid-232lwzcd] {
+    display: none !important;
+  }
+}
+
+/* Remove partner/credential logos from Experience & Education section */
+.section-social .logo-container,
+[data-astro-cid-232lwzcd] .logo-container,
+.logo-container[data-astro-cid-232lwzcd] {
+  display: none !important;
+}
