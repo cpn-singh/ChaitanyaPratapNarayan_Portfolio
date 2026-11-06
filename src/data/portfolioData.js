@@ -124,7 +124,7 @@ export const portfolioData = {
       badge: "CLEANTECH • 3D TELEMETRY • THREE.JS",
       description: "Clean power monitoring platform connecting renewable energy hubs with interactive 3D national radar telemetry.",
       techStack: ["React.js", "Three.js", "WebGL", "Tailwind CSS", "Vite"],
-      url: "https://green-grid-indol.vercel.app/",
+      url: "https://sylvra.vercel.app/",
       github: "https://github.com/cpn-singh",
       featured: true,
       stats: "60 FPS 3D Telemetry"
