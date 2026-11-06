@@ -106,6 +106,18 @@ export const portfolioData = {
   ],
   featuredProjects: [
     {
+      id: "virtualcare",
+      title: "Virtual Care Telehealth Platform",
+      category: "fullstack",
+      badge: "TELEMEDICINE • CLINICAL WORKFLOWS • REACT",
+      description: "Next-generation telemedicine and virtual clinical consultation platform featuring verified clinician onboarding, patient appointment scheduling, interactive doctor consultation portal, structured prescription authoring, AI care triage assistant, and clinical governance enforcement.",
+      techStack: ["React.js", "Tailwind CSS", "REST APIs", "Telehealth Architecture", "Modular State"],
+      url: "https://virtual-care-gamma.vercel.app/",
+      github: "https://github.com/cpn-singh",
+      featured: true,
+      stats: "Clinical Consultation Engine"
+    },
+    {
       id: "greengrid",
       title: "SYLVRA Clean Power Grid",
       category: "frontend",
