@@ -19,8 +19,8 @@ export const portfolioData = {
     status: "Active & Open for Opportunities"
   },
   contact: {
-    email: "cpnsingh2001@gmail.com",
-    phone: "+91 9350349962",
+    email: "chaitanyaptp24@gmail.com",
+    phone: "+919350349962",
     displayPhone: "+91 93503 49962",
     whatsappUrl: "https://wa.me/919350349962",
     address: "Maujpur, Shahdara, Delhi, India - 110053",

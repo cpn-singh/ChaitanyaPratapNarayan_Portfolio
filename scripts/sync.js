@@ -21,7 +21,10 @@ const htmlFiles = [
   'rag/index.html',
   'data-analysis/index.html',
   'privacy-policy/index.html',
-  'terms-of-use/index.html'
+  'terms-of-use/index.html',
+  '3d-frontend/index.html',
+  'state-apis/index.html',
+  'web-platforms/index.html'
 ];
 
 for (const rel of htmlFiles) {
@@ -33,8 +36,9 @@ for (const rel of htmlFiles) {
   // Contact info & Socials
   content = content.replace(/mailto:[^"'<>]+/g, `mailto:${c.email}`);
   content = content.replace(/[a-zA-Z0-9._%+-]+@gmail\.com/g, c.email);
-  content = content.replace(/tel:\+?[0-9]+/g, `tel:${c.phone}`);
-  content = content.replace(/\+91\s*[0-9\s]{10,12}/g, c.displayPhone);
+  content = content.replace(/href=["']tel:[^"']+["']/g, `href="tel:${c.phone.replace(/[^0-9+]/g, '')}"`);
+  content = content.replace(/P\s*:\s*\+91[0-9\s]+/g, `P : ${c.displayPhone}`);
+  content = content.replace(/>\+91[0-9\s]+<\/a>/g, `>${c.displayPhone}</a>`);
   content = content.replace(/https:\/\/github\.com\/[a-zA-Z0-9_-]+/g, s.github);
   content = content.replace(/github\.com\/[a-zA-Z0-9_-]+/g, s.githubDisplay);
   content = content.replace(/https:\/\/www\.linkedin\.com\/in\/[a-zA-Z0-9_-]+\/?/g, s.linkedin);
