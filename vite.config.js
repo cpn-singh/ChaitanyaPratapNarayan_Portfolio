@@ -31,15 +31,24 @@ function staticAssetsPlugin() {
       copyDir(resolve(__dirname, 'libs'), resolve(__dirname, 'dist/libs'));
       // 3. Copy entire _astro directory so all dynamic script imports resolve
       copyDir(resolve(__dirname, '_astro'), resolve(__dirname, 'dist/_astro'));
-      // 3. Copy sitemap if exists
+      // 4. Copy sitemap if exists
       const sitemap = resolve(__dirname, 'sitemap-index.xml');
       if (fs.existsSync(sitemap)) {
         fs.copyFileSync(sitemap, resolve(__dirname, 'dist/sitemap-index.xml'));
       }
-      // 4. Copy resume PDF if exists
+      // 5. Copy resume PDF if exists
       const pdf = resolve(__dirname, 'Abhi_Kumar_Gurjar_CV_Updated.pdf');
       if (fs.existsSync(pdf)) {
         fs.copyFileSync(pdf, resolve(__dirname, 'dist/Abhi_Kumar_Gurjar_CV_Updated.pdf'));
+      }
+      // 6. Copy Google site verification files if exist (both with and without .html extension)
+      const rootFiles = fs.readdirSync(__dirname);
+      for (const file of rootFiles) {
+        if (file.startsWith('google') && file.endsWith('.html')) {
+          fs.copyFileSync(resolve(__dirname, file), resolve(__dirname, 'dist', file));
+          const nameWithoutExt = file.replace(/\.html$/, '');
+          fs.copyFileSync(resolve(__dirname, file), resolve(__dirname, 'dist', nameWithoutExt));
+        }
       }
     }
   };
