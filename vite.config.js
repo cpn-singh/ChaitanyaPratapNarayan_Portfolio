@@ -31,11 +31,13 @@ function staticAssetsPlugin() {
       copyDir(resolve(__dirname, 'libs'), resolve(__dirname, 'dist/libs'));
       // 3. Copy entire _astro directory so all dynamic script imports resolve
       copyDir(resolve(__dirname, '_astro'), resolve(__dirname, 'dist/_astro'));
-      // 4. Copy sitemap if exists
-      const sitemap = resolve(__dirname, 'sitemap-index.xml');
-      if (fs.existsSync(sitemap)) {
-        fs.copyFileSync(sitemap, resolve(__dirname, 'dist/sitemap-index.xml'));
-      }
+      // 4. Copy sitemaps and robots if exist
+      ['sitemap.xml', 'sitemap-index.xml', 'sitemap-0.xml', 'robots.txt'].forEach(file => {
+        const filePath = resolve(__dirname, file);
+        if (fs.existsSync(filePath)) {
+          fs.copyFileSync(filePath, resolve(__dirname, 'dist', file));
+        }
+      });
       // 5. Copy resume PDF if exists
       const pdf = resolve(__dirname, 'Abhi_Kumar_Gurjar_CV_Updated.pdf');
       if (fs.existsSync(pdf)) {
